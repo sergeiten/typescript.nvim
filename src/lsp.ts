@@ -2,7 +2,7 @@ import { setupCommands } from "@ts/commands";
 import { config, ConfigOptions } from "@ts/config";
 import { renameHandler } from "@ts/handlers";
 import { TypescriptMethods } from "@ts/types/methods";
-import { tsserver } from "lspconfig";
+import { ts_ls } from "lspconfig";
 
 export const setupLsp = (overrides?: ConfigOptions): void => {
   const resolvedConfig = { ...config, ...(overrides || {}) };
@@ -26,5 +26,5 @@ export const setupLsp = (overrides?: ConfigOptions): void => {
       handlers?.[TypescriptMethods.RENAME] ?? renameHandler,
   };
 
-  tsserver.setup(resolvedConfig.server);
+  ts_ls.setup(resolvedConfig.server);
 };
