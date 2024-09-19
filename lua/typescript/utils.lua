@@ -9,8 +9,8 @@ ____exports.debugLog = function(...)
     print(...)
 end
 ____exports.getClient = function(bufnr)
-    for ____, client in pairs(vim.lsp.get_active_clients({bufnr = bufnr})) do
-        if client.name == "tsserver" then
+    for ____, client in pairs(vim.lsp.get_active_clients({ bufnr = bufnr })) do
+        if client.name == "ts_ls" then
             return client
         end
     end

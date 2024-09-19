@@ -1,7 +1,7 @@
 --[[ Generated with https://github.com/TypeScriptToLua/TypeScriptToLua ]]
 -- Lua Library inline imports
 local function __TS__ObjectAssign(target, ...)
-    local sources = {...}
+    local sources = { ... }
     for i = 1, #sources do
         local source = sources[i]
         for key in pairs(source) do
@@ -22,9 +22,9 @@ local renameHandler = ____handlers.renameHandler
 local ____methods = require("typescript.types.methods")
 local TypescriptMethods = ____methods.TypescriptMethods
 local ____lspconfig = require("lspconfig")
-local tsserver = ____lspconfig.tsserver
+local ts_ls = ____lspconfig.ts_ls
 ____exports.setupLsp = function(overrides)
-    local resolvedConfig = __TS__ObjectAssign({}, config, overrides or ({}))
+    local resolvedConfig = __TS__ObjectAssign({}, config, overrides or {})
     local ____resolvedConfig_server_0 = resolvedConfig.server
     local on_init = ____resolvedConfig_server_0.on_init
     local on_attach = ____resolvedConfig_server_0.on_attach
@@ -45,13 +45,17 @@ ____exports.setupLsp = function(overrides)
         end
     end
     local ____resolvedConfig_server_9 = resolvedConfig.server
-    local ____temp_7 = handlers or ({})
+    local ____temp_7 = handlers or {}
     local ____TypescriptMethods_RENAME_8 = TypescriptMethods.RENAME
     local ____handlers_TypescriptMethods_RENAME_5 = handlers
     if ____handlers_TypescriptMethods_RENAME_5 ~= nil then
         ____handlers_TypescriptMethods_RENAME_5 = ____handlers_TypescriptMethods_RENAME_5[TypescriptMethods.RENAME]
     end
-    ____resolvedConfig_server_9.handlers = __TS__ObjectAssign({}, ____temp_7, {[____TypescriptMethods_RENAME_8] = ____handlers_TypescriptMethods_RENAME_5 or renameHandler})
-    tsserver.setup(resolvedConfig.server)
+    ____resolvedConfig_server_9.handlers = __TS__ObjectAssign(
+        {},
+        ____temp_7,
+        { [____TypescriptMethods_RENAME_8] = ____handlers_TypescriptMethods_RENAME_5 or renameHandler }
+    )
+    ts_ls.setup(resolvedConfig.server)
 end
 return ____exports
